@@ -1,0 +1,60 @@
+按随处可见的教程安装Anaconda 
+这一部分的tips
+1.下个 3.7版的也没关系 到时候可以指定再安装别的版本的
+
+2.如果懒得之后再改环境变量的话 安装时一定勾选“Add Anaconda to my PATH environment variable”，即：添加 Anaconda 至环境变量
+[下面操作都在cmd里进行]
+conda --version 会显示出版本信息，说明安装成功
+
+3.安装后确认 /home/user目录下是否有condarc文件 
+	有的话最好,没有的话创建condarc文件
+	conda config --add channels r
+4.网上说的换镜像源的事 先不要换,2019年12月确认换源后会失败.搜索发现大家说国内源时好时坏...
+5.最新版Anaconda3默认 python3.7 我们希望指定安装3.5  
+conda install python=3.5
+
+6.安装libpython 用网上conda install mingw libpython命令装可能会失败 最好拆开分别安装
+conda install mingw
+conda install libpython 
+这个步骤有报错的话可以考虑换镜像
+
+7.查看源
+conda config --show-sources
+添加清华源
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+conda config --set show_channel_urls yes
+
+清华源凉了的话 还可以换别的学校的镜像源试试
+中国科技大学源
+http://mirrors.ustc.edu.cn/anaconda/pkgs/free/
+上海交通大学开源镜像
+https://mirrors.sjtug.sjtu.edu.cn/anaconda/pkgs/free/
+========================================================================
+按随处可见的教程安装Tensorflow 2.0
+参考 https://blog.csdn.net/Sarah_LZ/article/details/86364210
+cmd里执行
+conda create -n tensorflow python=3.5 
+activate tensorflow
+pip install --ignore-installed --upgrade tensorflow
+
+1.测试的时候	只需打import tensorflow as tf  运行不报错即可 或者可以跑一下本项目里code/testWork.py 顺便查看一下版本
+网上给的栗子包括下述代码的不用跑了 低版本写法,Tensorflow2.0不支持,反而会报错.
+	hello = tf.constant("Hello!TensorFlow!")  
+	sess = tf.Session()  
+	print(sess.run(hello))
+
+========================================================================
+低概率出错时可能有效的解决办法tips
+上述操作里一些版本不对应,检查conda的更新
+conda update conda
+
+========================================================================
+补充一些可以但最好不要有使用机会的骚操作:
+安装tensorflow真的很崩溃的时候可以去清华源拿离线版本,直接放到本地Anaconda的文件夹里 ,但是版本号非常琐碎一定要确认
+https://pypi.tuna.tsinghua.edu.cn/simple/tensorflow/
+官方文档确认版本
+https://www.tensorflow.org/install/source
+甚至可以通过这个方法强行安装Theano 
+下载一份解压到本地的库里
+https://github.com/Theano/Theano
+亲测python3.8会报一些无伤大雅的warming但可以跑, 然而通过pip安装的话会因为版本问题失败
