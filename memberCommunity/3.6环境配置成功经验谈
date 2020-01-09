@@ -1,5 +1,5 @@
 环境win10
-安装好Anaconda之后你可以配复数个环境 and 如果你之前的环境玩坏了的话 也不用整个删除,只需在针对某个环境删除重开就好
+安装好Anaconda之后你可以配复数个环境 and 如果你之前的环境玩坏了的话 也不用整个删除,只需针对某个环境删除重开就好
 一下记录新开个环境配置3.6的手顺
 查看环境命令conda env list
 一般默认环境是(base)
@@ -29,6 +29,9 @@ conda list
 然后就可以去run一下testWork看效果了
 刚setting完新环境后 可能很多库要更新,pycharm会帮我们跑 稍等一下即可
 
+testWork.py 运行成功之后
+运行和它同级文件夹下的 helloTensorflow.py 并引入一些其他的依赖库
+
 参考url https://www.bilibili.com/video/av62215565?p=2
 
 如果这个环境玩坏了,可以删了重来
@@ -38,3 +41,19 @@ conda deactivate
 conda remove -n [你的名字] --all
 你的环境名字=tensorflow的话跑下面这个就可以
 conda remove -n tensorflow --all
+
+关于慎用pip的理由
+pip
+用于python包的安装管理
+安装方式为源码安装
+pip是有版本的 python3的话就是pip3
+pip可以让你在任何环境中安装python的包
+
+conda
+用来管理Anaconda的包,也管理与python无关的任务. Anaconda本身是一个(python + 各种常用库)的所谓python发行版
+conda可以创建虚拟环境 安装并管理多个不同版本的语言包（包括C语言或者python）
+pip不能安装和解析conda的包格式 所以不能混用
+
+综上,针对本项目,建议安装Anaconda 使用conda命令
+
+
