@@ -1,0 +1,23 @@
+如果安装的是GPU版的话就稳得一b
+但是如之前几个文件内容所说 GPU版安装经常卡住
+所以一开始安装了cpu版 看似没什么事 但跑起来时出现了如下警告
+I tensorflow/core/platform/cpu_feature_guard.cc:145] This TensorFlow binary is optimized with Intel(R) MKL-DNN to use the following CPU instructions in performance critical operations:  AVX AVX2
+To enable them in non-MKL-DNN operations, rebuild TensorFlow with the appropriate compiler flags.
+I tensorflow/core/common_runtime/process_util.cc:115] Creating new thread pool with default inter op setting: 12. Tune using inter_op_parallelism_threads for best performance.
+
+这里面提到的AVX 是现在cpu大多数都提供的一个扩展
+这个警告大意是说当前CPU确实支持 AVX AVX2 但是tensorflow并不是使用此扩展的版本,所以提示说下载对应版本的tensorflow最大化使用你的CPU拓展
+
+tensorflow默认是在没有CPU扩展的情况下构建的，例如SSE4.1，SSE4.2，AVX，AVX2，FMA等。默认版本（来自默认 install tensorflow的版本）旨在与尽可能多的CPU兼容。
+当然更多情况下一般在GPU上执行,所以默认安装的话就不考虑cpu扩展了
+
+表面解决法:
+如果只是试试手,并不进行复杂操作的话可以降低警报提示级别 眼不见心不烦
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+
+彻底解决的话需要源码安装正确版本的tensorflow
+
+参考链接
+https://blog.csdn.net/beyond9305/article/details/95896135
+https://blog.csdn.net/GeneralLi95/article/details/80463628
