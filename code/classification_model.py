@@ -28,7 +28,7 @@ from tensorflow import keras
 #
 
 # 临时对应cpu报错问题
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+# os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 # 把helloTensorflow里的东西抄过来接着用
 fashion_mnist = keras.datasets.fashion_mnist
@@ -74,7 +74,7 @@ show_imgs(3, 5, x_train, y_train, class_names)
 
 
 model = tf.keras.models.Sequential()
-# 这里写成input_shape[28, 28]的话会报错
+# 这里写成input_shape[28, 28]的话会报错 具体参照文档
 model.add(keras.layers.Flatten(input_shape=(28, 28)))
 model.add(keras.layers.Dense(300, activation='relu'))
 model.add(keras.layers.Dense(100, activation='relu'))
