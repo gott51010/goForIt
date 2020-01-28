@@ -1,4 +1,4 @@
-"""决策树"""
+"""随机森林"""
 from sklearn import tree
 from sklearn.datasets import load_wine
 from sklearn.model_selection import train_test_split
@@ -6,6 +6,10 @@ import pandas as pd
 import pydotplus
 import graphviz
 
+
+# 随机森林是非常有代表性的bagging集成算法 他的所有基评估器都是决策树
+# 分类树组成的森林就叫随机森林分类器
+# 回归树....................回归器
 
 wine = load_wine()
 a = pd.concat([pd.DataFrame(wine.data), pd.DataFrame(wine.target)], axis=1)
