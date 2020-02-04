@@ -103,4 +103,4 @@ score_r = rfc.score(Xtest, Ytest)
 # 常用参数对模型的影响度
 # n_estimators 不影响单个模型的复杂度_
 # max_depth 默认最大深度,减小数值使模型简化
-# max_features morenauto是特征总数的开平方 增大使模型复杂 减小使模型简单
+# max_features 默认auto是特征总数的开平方 增大使模型复杂 减小使模型简单
