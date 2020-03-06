@@ -3,6 +3,7 @@
 
 # 数据预处理 把不准确或不适用于模型记录的数据纠正或删除掉
 from sklearn.preprocessing import MinMaxScaler
+from sklearn.preprocessing import StandardScaler
 import numpy as np
 import pandas as pd
 
@@ -80,3 +81,95 @@ print(x_nor)
 # 逆归一化
 x_return = x_nor*(x.max(axis=0) - x.min(axis=0)) + x.min(axis=0)
 print(x_return)
+
+
+# preprocessing.StandaradScaler
+# 标准化
+# 当数据(x)按均值中心化后,在按标准差(o)缩放 数据就会服从为均值为0 方差为1的正态分布
+# 这个过程叫做 数据标准化 Z-score normalization
+
+# from sklearn.preprocessing import StandardScaler
+
+data = [[-1, 2], [-0.5, 6], [0, 10], [1, 18]]
+
+scaler = StandardScaler()
+# fit 的本质是生成均值和方差
+scaler.fit(data)
+# 均值属性
+print(scaler.mean_)
+# 方差属性
+print(scaler.var_)
+# 导出结果
+x_std = scaler.transform(data)
+print(x_std.mean())
+print(x_std.std())
+
+# fit_transform 两步合一步
+scaler.fit_transform(data)
+# 逆标准化
+scaler.inverse_transform(data)
+
+
+# 注意点:
+# StandardScaler 和 MinMaxScaler  控制NaN会被当做是缺失值,在fit的时候忽略,在transform的时候保持缺失NaN的状态显示
+# 并且fit接口中 只允许导入至少二维数组 一位数组会报错
+# 嘛..不过实际运用中输入的X会是特征矩阵,矩阵不可能是一位数组 所以几乎不存在这个问题
+
+
+# 缺失值的处理
+# 数据不是完美的 所以对于建模来说需要填充缺失值
+
+from sklearn.impute import SimpleImputer
+
+imp_mean = SimpleImputer()
+# 参数指定 用中位数填补
+imp_median = SimpleImputer(strategy="median")
+# 用0 填补
+imp_median = SimpleImputer(strategy="constant", fill_value=0)
+
+
+# 除了这个库以外 也可用panda 和 Numpy
+import pandas as pd
+# 下面的代买因为没有合适的csvdata 所以跑不起来...
+# data = pd.read_csv()      #准备csv 假装这里有数据
+# data.head()
+# data.lot[:, "number"] = data.loc[:, "number"].fillna(data.loc[:, "number"].median())
+# # .fillna 在 DataFrame里面直接进行填充
+#
+# data.dropna(axis=0, inplace=True)
+
+
+# 分类型特征的处理
+# 编码与哑变量
+# 除了专门用来处理文字的算法,其他算法在fit的时候基本要求是传入数组矩阵
+# 但是现实生活中 许多特征收集完的时候是通过文字表现得
+# 这种情况下为了适应算法 必须对文字进行编码 把文字转化成数字
+
+# preprocessing.LabelEncoder
+# 标签专用,能够将分类转化为分类数值
+
+from sklearn.preprocessing import LabelEncoder
+
+# 也是没准备数据跑不了...
+# 这里要输入的是标签 不是特征矩阵
+# y = data.iloc[:, -1]
+# le = LabelEncoder()
+# le = le.fit(y)
+# label = le.transform(y)
+#
+# 属性 classes_ 查看标签中有多少类别
+# print(le.classes_)
+# 查看结果
+# print(label)
+#
+# le.fit_transform(y)
+# le.inverse_transform(label)
+# 赋值回去
+# data.iloc[:, -1] = label
+# data.head()
+
+
+# 上述可以偷懒为一行的写法
+# from sklearn.preprocessing import LabelEncoder
+# data.iloc[:, -1] = LabelEncoder().fit_transform(data.iloc[:, -1])
+
