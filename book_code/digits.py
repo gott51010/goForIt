@@ -9,16 +9,16 @@ from sklearn.metrics import precision_score, recall_score, f1_score
 
 digits = datasets.load_digits()
 
-# for label, img in zip(digits.target[:10], digits.images[:10]):
-#     # 两行5列显示
-#     plt.subplot(2,5,label + 1)
-#     plt.axis('off')
-#     # 显示图片
-#     plt.imshow(img, cmap=plt.cm.gray_r, interpolation='nearest')
-#     # 显示标题
-#     plt.title('Digit: {0}'.format(label))
-#
-# plt.show()
+for label, img in zip(digits.target[:10], digits.images[:10]):
+    # 两行5列显示
+    plt.subplot(2,5,label + 1)
+    plt.axis('off')
+    # 显示图片
+    plt.imshow(img, cmap=plt.cm.gray_r, interpolation='nearest')
+    # 显示标题
+    plt.title('Digit: {0}'.format(label))
+
+plt.show()
 
 # 读取3和8的位置
 flag_3_8 = (digits.target == 3) + (digits.target == 8)
