@@ -47,7 +47,7 @@ dot_data = tree.export_graphviz(clf, feature_names=wine.feature_names,
 
 # 跑不了这个库的话 需要安装Graphviz
 graph = pydotplus.graph_from_dot_data(dot_data)
-# 利用pydotplus 把决策树导出为图片(pdf也可)
+# 利用pydotplus 把决策树导出为图片(pdf也可)s
 with open('../LogisticTest/tree_graph.png', 'wb') as f:
     f.write(graph.create_png())
 
