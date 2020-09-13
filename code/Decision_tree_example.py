@@ -24,11 +24,11 @@ y = np.sin(x).ravel()
 # 手动加点噪声
 y[::5] += 3 * (0.5 - rng.rand(16))
 
-# 画图瞄一眼
-plt.figure()
-# 这个是画散点图的工具
-plt.scatter(x, y, s=20, edgecolors="black", c="darkorange", label="data")
-plt.show()
+# # 画图瞄一眼
+# plt.figure()
+# # 这个是画散点图的工具
+# plt.scatter(x, y, s=20, edgecolors="black", c="darkorange", label="data")
+# plt.show()
 
 # 实例化 and训练 建两个深度对比效果
 regr_1 = DecisionTreeRegressor(max_depth=2)
@@ -59,8 +59,13 @@ plt.legend()
 plt.show()
 
 # 结果小结 深度2还比较准确 深度5过拟合了
+<<<<<<< HEAD
 #
 #
+=======
+
+
+>>>>>>> second/53
 # 补充另一个豆知识
 # np的矩阵的维度  最外面的括号代表着 axis=0，依次往里的括号对应的 axis 的计数就依次加 1
 # test = np.array([[1, 2], [3, 4]])
