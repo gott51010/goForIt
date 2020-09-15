@@ -8,6 +8,9 @@ from sklearn.model_selection import train_test_split
 from sklearn.model_selection import cross_val_score
 
 
+# ensemble 集成算法
+
+
 # 随机森林是非常有代表性的bagging集成算法 他的所有基评估器都是决策树
 # 分类树组成的森林就叫随机森林分类器
 # 回归树....................回归器
