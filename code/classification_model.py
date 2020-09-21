@@ -30,6 +30,14 @@ from tensorflow import keras
 # 临时对应cpu报错问题
 # os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
+print("check GPU是否可用",tf.test.is_gpu_available())
+# tpu='ai-tpu-06'
+resolver = tf.distribute.cluster_resolver.TPUClusterResolver(tpu='ai-tpu-06')
+tf.config.experimental_connect_to_cluster(resolver)
+# This is the TPU initialization code that has to be at the beginning.
+tf.tpu.experimental.initialize_tpu_system(resolver)
+print("All devices: ", tf.config.list_logical_devices('TPU'))
+
 # 把helloTensorflow里的东西抄过来接着用
 fashion_mnist = keras.datasets.fashion_mnist
 (x_train_all, y_train_all), (x_test, y_test) = fashion_mnist.load_data()
@@ -64,7 +72,6 @@ def show_imgs(n_rows, n_cols, x_data, y_data, class_names):
 
 
 class_names = ['T-shirt', 'Trouser', 'Pullover', 'Dress', 'Coat', 'Sandal', 'Shirt', 'Sneaker', 'Bag', 'Ankle boot']
-
 show_imgs(3, 5, x_train, y_train, class_names)
 
 
@@ -84,3 +91,5 @@ model.add(keras.layers.Dense(10, activation="softmax"))
 # softmax: 将向量变成概率分布
 
 model.compile(loss="sparse_categorical_crossentropy", optimizer="sgd", metrics=["accuracy"])
+
+print('建模完成')
