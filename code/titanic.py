@@ -141,8 +141,8 @@ gini_threholds = np.linspace(0,0.5,50)
 parameters = {
     "criterion": ("gini", "entropy")
     , "splitter": ("best", "random")
-    , "max_depth": [*range(1, 10)]
-    , "min_samples_leaf": [*range(1, 50, 5)]
+    , "max_depth": [*range(2, 8)]
+    , "min_samples_leaf": [*range(1, 20, 5)]
     # 信息增益最小值
     , "min_impurity_decrease": gini_threholds
 }
@@ -150,4 +150,5 @@ parameters = {
 GS = GridSearchCV(clf, parameters, cv=10)
 GS.fit(Xtrain, Ytrain)
 print(GS.best_params_)
+
 # {'criterion': 'entropy', 'max_depth': 6, 'min_impurity_decrease': 0.01020408163265306, 'min_samples_leaf': 1, 'splitter': 'best'}
